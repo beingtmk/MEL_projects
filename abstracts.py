@@ -48,8 +48,6 @@ for id in alias_results["IdList"]:
 print("*Downloaded:")
 print(aliases)
 
-print()
-
 while(input("Want to remove any from the list of aliases: (y/n)") == 'y'):
     str = input("Enter a alias to remove: ")
     #print(str)
@@ -68,14 +66,22 @@ print(aliases)
 # aliases = ["GPER", "GPER1", "GPR30", "GPCR-bR", "G Protein-Coupled Estrogen Receptor 1", "G-Protein Coupled Estrogen Receptor 1"]
 
 #abstract download
+related_query = input("pls enter a related Query: (term or None) ")
+
 dict = {}
 
 for compound in aliases:
-    search_results = Entrez.read(Entrez.esearch(db="pubmed",
-                                                term=compound, usehistory='y'))
+    term = compound
+    if(related_query == 'None'):
+        search_results = Entrez.read(Entrez.esearch(db="pubmed",
+                                                    term=term, usehistory='y'))
+    else:
+        term  = "({}) AND {}".format(compound, related_query)
+        search_results = Entrez.read(Entrez.esearch(db="pubmed",
+                                                    term=term, usehistory='y'))
 
     count = int(search_results["Count"])
-    print("Found %i results for %s" %(count, compound))
+    print("Found %i results for %s" %(count, term))
 
     batch_size = min(50, count)
     #batch_size = 0;
