@@ -10,8 +10,7 @@ except ImportError:
     from urllib2 import HTTPError  # for Python 2
 Entrez.email = "beingtmk@gmail.com"
 
-print("pls enter a term:")
-gene = input()
+gene = input("pls enter a term:")
 
 #getting aliases
 alias_results = Entrez.read(Entrez.esearch(db="gene",
@@ -49,19 +48,17 @@ for id in alias_results["IdList"]:
 print("*Downloaded:")
 print(aliases)
 
-print("Want to remove any from the list of aliases: (y/n)")
+print()
 
-while(input() == 'y'):
-    print("Enter a alias to remove: ")
-    str = input()
+while(input("Want to remove any from the list of aliases: (y/n)") == 'y'):
+    str = input("Enter a alias to remove: ")
     #print(str)
     aliases.remove(str)
     print("Want to remove any more from the list of aliases: (y/n)")
 
 print("Want to add any to the list of aliases: (y/n)")
 while(input() == 'y'):
-    print("Enter a alias to remove: ")
-    str = input()
+    str = input("Enter a alias to remove: ")
     aliases.append(str)
     print("Want to add any more to the list of aliases: (y/n)")
 
