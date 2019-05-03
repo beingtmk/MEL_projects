@@ -51,10 +51,10 @@ def main(compound):
 
     return aliases
 
-print("Insert file name")
-file = input()
+print("output file name:")
+output = input()
 
-data = open(file, "r").read()
+data = open(output, "r").read()
 
 #remove the last empty element
 genes = data.split("\n")[:-1]
@@ -74,4 +74,4 @@ for idx,gene in enumerate(genes):
         json.dump(dict, fp)
 
 
-print("gene_alias.json successfully created.")
+print("%s successfully created."%output)
